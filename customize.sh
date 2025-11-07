@@ -21,6 +21,8 @@ if [ -z "$SDK_VERSION" ];
 fi
 
 ui_print "Fixing GApps permissions"
+ui_print
+
 pm list packages -a | grep "google" | while read -r PKG_LINE; 
     do
         PKG_NAME=$(echo "$PKG_LINE" | cut -d ':' -f 2)
@@ -51,10 +53,10 @@ pm list packages -a | grep "google" | while read -r PKG_LINE;
         fi
 done
 
-ui_print "Restarting GMS"
+ui_print "--- Restarting GMS ---"
 am force-stop com.google.android.gms
 sleep 5
 
-ui_print "Finished processing all packages."
+ui_print "--- Finished processing all packages ---"
 ui_print
 abort "This script will now abort for a native cleanup."
